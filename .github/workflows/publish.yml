@@ -36,6 +36,7 @@ jobs:
           install.packages("class", dependencies = TRUE)
           install.packages('stringi', dependencies = TRUE)
           install.packages('pander', dependencies = TRUE)
+          install.packages('huxtable', dependencies = TRUE)
           remotes::install_github("aalborg-intelligence/aai")
         shell: Rscript {0}
         env:
