@@ -2111,7 +2111,7 @@ Vi forestiller os nu, at vi lader et vindue på $3 \times 3$ pixels kører
 henover billedet, som vist på @fig-sliding_window.
 
 
-::: {#fig-sliding_window layout-nrow=3}
+::: {#fig-sliding_window}
 ![](images/sliding_window1.png)
 ![](images/sliding_window2.png)
 ![](images/sliding_window3.png)
@@ -2207,49 +2207,19 @@ set_all_borders(ht)
 ```
 
 Et feature map, som kan bruges til at finde henholdsvis lodrette og
-vandret linjer i et billede er vist i @tbl-feature_maps.
+vandret linjer i et billede er vist i @fig-feature_maps.
 
-::: {#tbl-feature_maps layout-ncol=2}
+::: {#fig-feature_maps}
 ```{r}
 feature1<-matrix(c(1,0,-1,1,0,-1,1,0,-1),nrow=3)
 f1<-hux(feature1)
 set_all_borders(f1)
-```
-
-: First Table {#tbl-first}
-
-```{r}
 feature2<-matrix(c(1,1,1,0,0,0,-1,-1,-1),nrow=3)
 f2<-hux(feature2)
 set_all_borders(f2)
 ```
-
-: Second Table {#tbl-second}
-
 Eksempler på feature maps. Venstre: Et feature map $f_1$, som kan finde vandrette linjer i billeder. Højre: Et feature map $f_2$, som kan finde lodrette linjer i billeder.
 :::
-
-::: {#tbl-panel layout-ncol=2}
-| Col1 | Col2 | Col3 |
-|------|------|------|
-| A    | B    | C    |
-| E    | F    | G    |
-| A    | G    | G    |
-
-: First Table {#tbl-first}
-
-| Col1 | Col2 | Col3 |
-|------|------|------|
-| A    | B    | C    |
-| E    | F    | G    |
-| A    | G    | G    |
-
-: Second Table {#tbl-second}
-
-Main Caption
-:::
-
-See @tbl-panel for details, especially @tbl-second.
 
 Det ses hurtigt, at hvis vi anvender feature map $f_1$ til at vægte
 værdierne i et vilkårligt $9 \times 9$ vindue i det originale billede, så får man $0$ (såfremt vi sætter biasværdien $v_0=0$). Anvender vi f.eks. $f_1$ på det tredje
