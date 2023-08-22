@@ -3161,7 +3161,6 @@ return!"\t\n\x0B\f\r                　\u2028\u2029
   </ul></li>
   <li><a href="#valg-af-tabsfunktion" id="toc-valg-af-tabsfunktion" class="nav-link" data-scroll-target="#valg-af-tabsfunktion">Valg af tabsfunktion</a></li>
   <li><a href="#billedgenkendelse-og-kunstige-neurale-netværk" id="toc-billedgenkendelse-og-kunstige-neurale-netværk" class="nav-link" data-scroll-target="#billedgenkendelse-og-kunstige-neurale-netværk">Billedgenkendelse og kunstige neurale netværk</a></li>
-  <li><a href="#noten-som-pdf" id="toc-noten-som-pdf" class="nav-link" data-scroll-target="#noten-som-pdf">Noten som pdf</a></li>
   <li><a href="#videre-læsning" id="toc-videre-læsning" class="nav-link" data-scroll-target="#videre-læsning">Videre læsning</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="neurale_net-note.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -3421,11 +3420,13 @@ w_2 &amp;\leftarrow w_2 + \eta  \cdot \delta \cdot z_2 \\
 \frac{\partial E}{\partial v_1} = \frac{d E}{d o} \cdot \frac{\partial o}{\partial z_1} \cdot \frac{\partial z_1}{\partial v_1}
 \]</span> Vi ved allerede fra (<a href="#eq-dEdo">14</a>), at <span class="math display">\[
 \frac{d E}{d o} = -(t-o)
-\]</span> Den partielle afledede af <span class="math inline">\(o\)</span> med hensyn til <span class="math inline">\(z_1\)</span> finder vi ved at bruge definitionen af outputværiden <span class="math inline">\(o\)</span> i (<a href="#eq-o">10</a>) <span class="math display">\[\begin{align}
-\frac{\partial o}{\partial z_1} &amp;= \sigma&#39;(w_1 \cdot z_1+w_2 \cdot z_2 + w_0) \cdot w_1 \nonumber \\
-&amp;= \sigma(w_1 \cdot z_1+w_2 \cdot z_2 + w_0) \cdot (1-\sigma(w_1 \cdot z_1+w_2 \cdot z_2 + w_0)) \cdot w_1 \nonumber \\
+\]</span> Den partielle afledede af <span class="math inline">\(o\)</span> med hensyn til <span class="math inline">\(z_1\)</span> finder vi ved at bruge definitionen af outputværiden <span class="math inline">\(o\)</span> i (<a href="#eq-o">10</a>) <span id="eq-dodz_1"><span class="math display">\[
+\begin{aligned}
+\frac{\partial o}{\partial z_1} &amp;= \sigma&#39;(w_1 \cdot z_1+w_2 \cdot z_2 + w_0) \cdot w_1  \\
+&amp;= \sigma(w_1 \cdot z_1+w_2 \cdot z_2 + w_0) \cdot (1-\sigma(w_1 \cdot z_1+w_2 \cdot z_2 + w_0)) \cdot w_1  \\
 &amp;= o \cdot (1-o) \cdot w_1
-\end{align}\]</span> {#eq-dodz_1} hvor vi igen har brugt <a href="#thm-sigmoid_diff">sætning 1</a>. Og endelig ved at udnytte definitionen af <span class="math inline">\(z_1\)</span> i (<a href="#eq-z_1">8</a>) får vi, at <span class="math display">\[\begin{align}
+\end{aligned}
+\tag{18}\]</span></span> hvor vi igen har brugt <a href="#thm-sigmoid_diff">sætning 1</a>. Og endelig ved at udnytte definitionen af <span class="math inline">\(z_1\)</span> i (<a href="#eq-z_1">8</a>) får vi, at <span class="math display">\[\begin{align}
 \frac{\partial z_1}{\partial v_1} &amp;= \sigma&#39;(v_1 \cdot y_1+v_2 \cdot y_2 + v_0) \cdot y_1 \\
 &amp;= \sigma(v_1 \cdot y_1+v_2 \cdot y_2 + v_0) \cdot (1-\sigma(v_1 \cdot y_1+v_2 \cdot y_2 + v_0)) \cdot y_1 \\
 &amp;= z_1 \cdot (1-z_1) \cdot y_1
@@ -3512,9 +3513,9 @@ o(z_1(y_1), z_2(y_1))
 \frac{\partial o}{\partial z_1} \cdot \frac{\partial z_1}{\partial y_1} + \frac{\partial o}{\partial z_2} \cdot \frac{\partial z_2}{\partial y_1}
 \right)
 \cdot \frac{\partial y_1}{\partial r_1}
-  \tag{18}\]</span></span> Vi finder hver af de afledede, som indgår i ovenstående udtryk én ad gangen. Vi ved allerede fra (<a href="#eq-dEdo">14</a>), at <span class="math display">\[
+  \tag{19}\]</span></span> Vi finder hver af de afledede, som indgår i ovenstående udtryk én ad gangen. Vi ved allerede fra (<a href="#eq-dEdo">14</a>), at <span class="math display">\[
 \frac{d E}{d o} = \frac{1}{2} \cdot 2 \cdot (t-o) \cdot (-1) = -(t-o)
-\]</span> Vi ved også fra (<strong>?@eq-dodz_1</strong>), at <span class="math display">\[
+\]</span> Vi ved også fra (<a href="#eq-dodz_1">18</a>), at <span class="math display">\[
 \frac{\partial o}{\partial z_1} = o \cdot (1-o) \cdot w_1
 \]</span> Differentieres <span class="math inline">\(z_1\)</span> (se (<a href="#eq-z_1">8</a>)) med hensyn til <span class="math inline">\(y_1\)</span> får vi <span class="math display">\[\begin{align}
 \frac{\partial z_1}{\partial y_1} &amp;= \sigma&#39;(v_1 \cdot y_1 + v_2 \cdot y_2 + v_0)\cdot v_1 \\
@@ -3524,7 +3525,7 @@ o(z_1(y_1), z_2(y_1))
 \]</span> og <span class="math display">\[
 \frac{\partial z_2}{\partial y_1} = z_2 \cdot (1-z_2)\cdot u_1
 \]</span> Den sidste partielle afledede <span class="math inline">\(\frac{\partial y_1}{\partial r_1}\)</span> finder vi ved at differentiere udtrykket for <span class="math inline">\(y_1\)</span> i (<a href="#eq-y_1_1">4</a>), hvor vi endnu engang udnytter <a href="#thm-sigmoid_diff">sætning 1</a>.</p>
-<p>Indsætter vi nu alle de udtryk, som vi netop har udledt, i (<a href="#eq-samlet_dE_dr1">18</a>)får vi et temmelig langt udtryk for <span class="math inline">\(\frac{\partial E}{\partial r_1}\)</span>: <span class="math display">\[\begin{align}
+<p>Indsætter vi nu alle de udtryk, som vi netop har udledt, i (<a href="#eq-samlet_dE_dr1">19</a>) får vi et temmelig langt udtryk for <span class="math inline">\(\frac{\partial E}{\partial r_1}\)</span>: <span class="math display">\[\begin{align}
 \frac{\partial E}{\partial r_1} &amp;= \underbrace{-(t-o)}_{\frac{dE}{do}}\cdot \\ &amp;\Big( \underbrace{o\cdot(1-o)\cdot w_1}_{\frac{\partial o}{\partial z_1}} \cdot \underbrace{z_1\cdot(1-z_1)\cdot v_1}_{\frac{\partial z_1}{\partial y_1}}+\underbrace{o\cdot(1-o)\cdot w_2}_{\frac{\partial o}{\partial z_2}}\cdot \underbrace{z_2\cdot(1-z_2)\cdot u_1}_{\frac{\partial z_2}{\partial y_1}}\Big)\cdot \\ &amp; \qquad \underbrace{y_1\cdot(1-y_1)\cdot x_1}_{\frac{\partial y_1}{\partial r_1}}
 \end{align}\]</span> Og sætter vi <span class="math inline">\(o\cdot(1-o)\)</span> uden for parentesen og erstatter <span class="math inline">\((t-o)\cdot o\cdot (1-o)\)</span> med <span class="math inline">\(\delta\)</span> får vi <span class="math display">\[
 \frac{\partial E}{\partial r_1}
@@ -3704,9 +3705,9 @@ Feedforward-ligninger til lag 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Beregn først: <span class="math display">\[\begin{align}
+<p>Beregn først: <span id="eq-lag3"><span class="math display">\[
 z_j^{(3)} = \sum_{i=1}^{3} w_{ji}^{(3)} a_i^{(2)} +  b_j^{(3)}
-\end{align}\]</span> {#eq-lag3} Outputværdierne for neuroner i det tredje lag udregnes dernæst på denne måde: <span class="math display">\[\begin{align}
+\tag{20}\]</span></span> Outputværdierne for neuroner i det tredje lag udregnes dernæst på denne måde: <span class="math display">\[\begin{align}
 a_j^{(3)} &amp;= \sigma(z_j^{(3)})
 \end{align}\]</span> for <span class="math inline">\(j \in \{1, 2 \}\)</span>.</p>
 </div>
@@ -3722,9 +3723,9 @@ Feedforward-ligninger til lag 4
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Udregn først: <span class="math display">\[\begin{align}
+<p>Udregn først: <span id="eq-lag4"><span class="math display">\[
 z_j^{(4)} = \sum_{i=1}^{2} w_{ji}^{(4)} a_i^{(3)} +  b_j^{(4)}
-\end{align}\]</span> {#eq-lag4} Outputværdierne for neuroner i det tredje lag udregnes dernæst på denne måde: <span class="math display">\[\begin{align}
+\tag{21}\]</span></span> Outputværdierne for neuroner i det tredje lag udregnes dernæst på denne måde: <span class="math display">\[\begin{align}
 y_j = a_j^{(4)} &amp;= \sigma(z_j^{(4)})
 \end{align}\]</span> for <span class="math inline">\(j \in \{1, 2, 3 \}\)</span>.</p>
 </div>
@@ -3758,24 +3759,24 @@ a_j^{(k)} &amp;= \sigma(z_j^{(k)})
 \frac{\partial E}{\partial w_{ji}^{(4)}} \quad \text{og} \quad \frac{\partial E}{\partial b_j^{(4)}},
 \]</span> for <span class="math inline">\(j \in \{1, 2, 3\}\)</span>, <span class="math inline">\(i \in \{1, 2\}\)</span>. Tabsfunktionen <span class="math inline">\(E\)</span>, som hører til netværket i <a href="#fig-netvaerk3">figur 7</a>, bliver her: <span id="eq-E_indekser"><span class="math display">\[
 E=\frac{1}{2} \sum_{j=1}^3 \left( t_j-y_j \right)^2 = \frac{1}{2} \sum_{j=1}^3 \left( t_j-a_j^{(4)} \right)^2
-\tag{19}\]</span></span> hvor igen <span class="math inline">\(t_j\)</span> er den ønskede target-værdi for den <span class="math inline">\(j\)</span>’te outputneuron.</p>
+\tag{22}\]</span></span> hvor igen <span class="math inline">\(t_j\)</span> er den ønskede target-værdi for den <span class="math inline">\(j\)</span>’te outputneuron.</p>
 <p>Lad os starte med at bestemme <span class="math inline">\(\frac{\partial E}{\partial w_{ji}^{(4)}}\)</span>. Vi må derfor først se på, hvordan <span class="math inline">\(w_{ji}^{(4)}\)</span> påvirker tabsfunktionen <span class="math inline">\(E\)</span>. Da <span class="math inline">\(w_{ji}^{(4)}\)</span> kun indgår i udtrykket for beregningen af <span class="math inline">\(z_j^{(4)}\)</span>, som igen bruges til beregningen af <span class="math inline">\(a_j^{(4)}\)</span>, som dernæst direkte påvirker tabsfunktionen, kan vi skrive: <span class="math display">\[
 w_{ji}^{(4)} \rightarrow z_j^{(4)} \rightarrow a_j^{(4)} \rightarrow E
 \]</span> Bruger vi først kædereglen én gang, får vi derfor <span id="eq-partialE_w_ji_4"><span class="math display">\[
 \frac{\partial E}{\partial w_{ji}^{(4)}} = \frac{\partial E}{\partial z_j^{(4)}} \cdot \frac{\partial z_j^{(4)}}{\partial w_{ji}^{(4)}}
-\tag{20}\]</span></span> og bruges kædereglen igen, kan første faktor udfoldes yderligere <span class="math display">\[
+\tag{23}\]</span></span> og bruges kædereglen igen, kan første faktor udfoldes yderligere <span class="math display">\[
 \frac{\partial E}{\partial z_j^{(4)}} = \frac{\partial E}{\partial a_j^{(4)}} \cdot  \frac{\partial a_j^{(4)}}{\partial z_j^{(4)}}
-\]</span> Lad os starte med at udregne <span class="math inline">\(\frac{\partial E}{\partial z_j^{(4)}}\)</span> ved at udregne hver faktor på højresiden i ovenstående udtryk for sig. Fra (<a href="#eq-E_indekser">19</a>) får vi, at <span class="math display">\[
+\]</span> Lad os starte med at udregne <span class="math inline">\(\frac{\partial E}{\partial z_j^{(4)}}\)</span> ved at udregne hver faktor på højresiden i ovenstående udtryk for sig. Fra (<a href="#eq-E_indekser">22</a>) får vi, at <span class="math display">\[
 E=\frac{1}{2} \sum_{j=1}^3 \left( t_j-a_j^{(4)} \right)^2 = \frac{1}{2} \left( \left( t_1-a_1^{(4)} \right)^2 + \left( t_2-a_2^{(4)} \right)^2+ \left( t_3-a_3^{(4)}\right)^2 \right)
 \]</span> Hvis vi f.eks. skal differentiere ovenstående med hensyn til <span class="math inline">\(a_2^{(4)}\)</span>, kan vi se at alle de led, som ikke indeholder <span class="math inline">\(a_2^{(4)}\)</span>, vil være at betragte som konstanter, når vi differentierer - og når vi differentierer konstanter, får vi som bekendt <span class="math inline">\(0\)</span>. Derfor får vi, at <span class="math display">\[
 \frac{\partial E}{\partial a_2^{(4)}} = \frac{1}{2}\cdot 2 \cdot (t_2-a_2^{(4)})\cdot (-1) = -(t_2-a_2^{(4)})
 \]</span> På tilsvarende vis har vi derfor generelt, at <span id="eq-partialE_a_j_4"><span class="math display">\[
 \frac{\partial E}{\partial a_j^{(4)}} = -(t_j-a_j^{(4)})
-\tag{21}\]</span></span> Vi ved også, at <span class="math display">\[
+\tag{24}\]</span></span> Vi ved også, at <span class="math display">\[
 a_j^{(4)} = \sigma(z_j^{(4)})
 \]</span> Og bruger vi endnu en gang resultatet fra <a href="#thm-sigmoid_diff">sætning 1</a> får vi, at <span id="eq-partial_a_j^(z)_z_j^(4)"><span class="math display">\[
 \frac{\partial a_j^{(4)}}{\partial z_j^{(4)}}  = \sigma&#39;(z_j^{(4)})= \sigma(z_j^{(4)}) \cdot (1-\sigma(z_j^{(4)}))= a_j^{(4)}\cdot (1-a_j^{(4)})
-\tag{22}\]</span></span> Indtil videre har vi altså, at <span class="math display">\[\begin{align}
+\tag{25}\]</span></span> Indtil videre har vi altså, at <span class="math display">\[\begin{align}
 \frac{\partial E}{\partial z_j^{(4)}} &amp;= \frac{\partial E}{\partial a_j^{(4)}} \cdot  \frac{\partial a_j^{(4)}}{\partial z_j^{(4)}} \\
 &amp;=-(t_j-a_j^{(4)}) \cdot  a_j^{(4)}\cdot (1-a_j^{(4)})
 \end{align}\]</span> I forhold til det videre arbejde viser det sig hensigtsmæssigt, at lave en samlet betegnelse for <span class="math display">\[\begin{align}
@@ -3784,7 +3785,7 @@ a_j^{(4)} = \sigma(z_j^{(4)})
 \end{align}\]</span> Vi sætter derfor <span class="math display">\[
 \delta_j^{(4)} = \frac{\partial E}{\partial z_j^{(4)}}  = -(t_j-a_j^{(4)}) \cdot a_j^{(4)} \cdot (1-a_j^{(4)})
 \]</span> Udtrykket <span class="math inline">\(\delta_j^{(4)}\)</span> kalder man også for fejlleddet for det fjerde lag, men det kommer vi tilbage til senere.</p>
-<p>Vi har nu fundet den første faktor i (<a href="#eq-partialE_w_ji_4">20</a>), og mangler derfor kun at bestemme <span class="math inline">\(\frac{\partial z_j^{(4)}}{\partial w_{ji}^{(4)}}\)</span>. Bruger vi (<strong>?@eq-lag4</strong>) ser vi, at <span class="math display">\[
+<p>Vi har nu fundet den første faktor i (<a href="#eq-partialE_w_ji_4">23</a>), og mangler derfor kun at bestemme <span class="math inline">\(\frac{\partial z_j^{(4)}}{\partial w_{ji}^{(4)}}\)</span>. Bruger vi (<a href="#eq-lag4">21</a>) ser vi, at <span class="math display">\[
 z_j^{(4)} =  \sum_{i=1}^{2} w_{ji}^{(4)} a_i^{(3)} +  b_j^{(4)}  =
 w_{j1}^{(4)} a_1^{(3)}+ w_{j2}^{(4)} a_2^{(3)} +  b_j^{(4)}
 \]</span> Skal vi f.eks. differentiere dette udtryk med hensyn til <span class="math inline">\(w_{j1}^{(4)}\)</span>, får vi (fordi de fleste led i ovenstående, vil være at betragte som konstanter) <span class="math display">\[
@@ -3793,8 +3794,8 @@ w_{j1}^{(4)} a_1^{(3)}+ w_{j2}^{(4)} a_2^{(3)} +  b_j^{(4)}
 \frac{\partial z_j^{(4)}}{\partial w_{j2}^{(4)}} =  a_2^{(3)}
 \]</span> Generelt har vi derfor, at <span id="eq-partial_z_j_4_w_ji_4"><span class="math display">\[
 \frac{\partial z_j^{(4)}}{\partial w_{ji}^{(4)}} = a_i^{(3)}
-\tag{23}\]</span></span></p>
-<p>Samler vi nu de tre udtryk, som vi netop har udledt og indsætter i (<a href="#eq-partialE_w_ji_4">20</a>) får vi <span class="math display">\[
+\tag{26}\]</span></span></p>
+<p>Samler vi nu de tre udtryk, som vi netop har udledt og indsætter i (<a href="#eq-partialE_w_ji_4">23</a>) får vi <span class="math display">\[
 \frac{\partial E}{\partial w_{ji}^{(4)}} =  -(t_j-a_j^{(4)}) \cdot a_j^{(4)} \cdot (1-a_j^{(4)}) \cdot a_i^{(3)}
 \]</span> og med den lidt kortere notation, som vi indførte ovenfor, kan vi nu skrive <span class="math display">\[
 \frac{\partial E}{\partial w_{ji}^{(4)}} =  \delta_j^{(4)} \cdot a_i^{(3)}
@@ -3802,7 +3803,7 @@ w_{j1}^{(4)} a_1^{(3)}+ w_{j2}^{(4)} a_2^{(3)} +  b_j^{(4)}
 \frac{\partial E}{\partial b_j^{(4)}} = \frac{\partial E}{\partial z_j^{(4)}} \cdot \frac{\partial z_j^{(4)}}{\partial b_j^{(4)}}
 \]</span> Vi ved allerede, at <span class="math display">\[\begin{align}
 \frac{\partial E}{\partial z_j^{(4)}}  = \delta_j^{(4)}
-\end{align}\]</span> og ser man på ligningen i (<strong>?@eq-lag4</strong>), ses det nemt, at <span class="math display">\[
+\end{align}\]</span> og ser man på ligningen i (<a href="#eq-lag4">21</a>), ses det nemt, at <span class="math display">\[
 \frac{\partial z_j^{(4)}}{\partial b_j^{(4)}} = 1
 \]</span> og derfor har vi, at <span class="math display">\[
 \frac{\partial E}{\partial b_j^{(4)}}  =\delta_j^{(4)}
@@ -3821,13 +3822,13 @@ Opdateringsregler til vægte og bias i outputlaget (lag 4)
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Vægtene i outputlaget opdateres på denne måde: <span class="math display">\[\begin{align}
+<p>Vægtene i outputlaget opdateres på denne måde: <span class="math display">\[
 w_{ji}^{(4)} \leftarrow w_{ji}^{(4)} - \eta \cdot \delta_j^{(4)} \cdot a_i^{(3)}
-\end{align}\]</span> Biasene i outputlaget opdateres på denne måde: <span class="math display">\[\begin{align}
+\]</span> Biasene i outputlaget opdateres på denne måde: <span class="math display">\[
 b_j^{(4)} \leftarrow b_j^{(4)} - \eta \cdot \delta_j^{(4)}
-\end{align}\]</span> hvor <span class="math display">\[\begin{align}
+\]</span> hvor <span id="eq-error_term_j_4"><span class="math display">\[
 \delta_j^{(4)} = \frac{\partial E}{\partial z_j^{(4)}}= -(t_j-a_j^{(4)}) \cdot a_j^{(4)} \cdot (1-a_j^{(4)})
-\end{align}\]</span> {#eq-error_term_j_4}</p>
+\tag{27}\]</span></span></p>
 </div>
 </div>
 <p>Udtrykket <span class="math inline">\(\delta_j^{(4)}\)</span> kalder man, som nævnt tidligere, også for fejlleddet i den <span class="math inline">\(j\)</span>’te række i det fjerde lag, og man kan se på ovenstående opdateringsregler, at dette fejlled netop indgå i opdateringen af både vægtene og biasene. Faktisk kan vi præcis, som vi gjorde det på side , tillægge dette fejlled en intuitiv god mening. Det kommer vi tilbage til igen senere!</p>
@@ -3848,16 +3849,16 @@ z_2^{(4)} \rightarrow a_2^{(4)} &amp; \rightarrow &amp; E \\
 \end{matrix}
 \]</span> I første omgang kan vi skrive <span id="eq-partialE_w_ji_3"><span class="math display">\[
 \frac{\partial E}{\partial w_{ji}^{(3)}} = \frac{\partial E}{\partial z_j^{(3)}} \cdot \frac{\partial z_j^{(3)}}{\partial w_{ji}^{(3)}}
-\tag{24}\]</span></span> og så gentagne gange bruge kædereglen til at udfolde dette udtryk.</p>
-<p>Lad os starte med det nemmeste, nemlig <span class="math inline">\(\frac{\partial z_j^{(3)}}{\partial w_{ji}^{(3)}}\)</span>. Ser vi på definitionen af <span class="math inline">\(z_j^{(3)}\)</span> i (<strong>?@eq-lag3</strong>), kan vi argumentere helt tilsvarende, som da vi ovenfor udledte udtrykket i (<a href="#eq-partial_z_j_4_w_ji_4">23</a>) og får <span class="math display">\[
+\tag{28}\]</span></span> og så gentagne gange bruge kædereglen til at udfolde dette udtryk.</p>
+<p>Lad os starte med det nemmeste, nemlig <span class="math inline">\(\frac{\partial z_j^{(3)}}{\partial w_{ji}^{(3)}}\)</span>. Ser vi på definitionen af <span class="math inline">\(z_j^{(3)}\)</span> i (<a href="#eq-lag3">20</a>), kan vi argumentere helt tilsvarende, som da vi ovenfor udledte udtrykket i (<a href="#eq-partial_z_j_4_w_ji_4">26</a>) og får <span class="math display">\[
 \frac{\partial z_j^{(3)}}{\partial w_{ji}^{(3)}} = a_i^{(2)}
 \]</span></p>
-<p>Lad os nu kaste os over den første faktor i (<a href="#eq-partialE_w_ji_3">24</a>). Vi kan starte med at udnytte denne lidt overordnede måde, som <span class="math inline">\(z_j^{(3)}\)</span> påvirker <span class="math inline">\(E\)</span> på <span class="math display">\[
+<p>Lad os nu kaste os over den første faktor i (<a href="#eq-partialE_w_ji_3">28</a>). Vi kan starte med at udnytte denne lidt overordnede måde, som <span class="math inline">\(z_j^{(3)}\)</span> påvirker <span class="math inline">\(E\)</span> på <span class="math display">\[
 z_j^{(3)} \rightarrow a_j^{(3)} \rightarrow E
 \]</span> Kædereglen giver os derfor i første omgang <span id="eq-partial_E_z_j_3"><span class="math display">\[
 \frac{\partial E}{\partial z_j^{(3)}} = \frac{\partial E}{\partial a_j^{(3)}} \cdot
 \frac{\partial a_j^{(3)}}{\partial z_j^{(3)}}
-\tag{25}\]</span></span> Igen er sidste faktor nem nok, idet <span class="math display">\[
+\tag{29}\]</span></span> Igen er sidste faktor nem nok, idet <span class="math display">\[
 a_j^{(3)} = \sigma (z_j^{(3)})
 \]</span> og derfor er <span class="math display">\[
 \frac{\partial a_j^{(3)}}{\partial z_j^{(3)}} = \sigma&#39; (z_j^{(3)})=\sigma(z_j^{(3)})\cdot (1-\sigma(z_j^{(3)}))= a_j^{(3)} \cdot (1-a_j^{(3)}),
@@ -3883,9 +3884,11 @@ z_2^{(4)} &amp; \rightarrow &amp; E \\
 \]</span> Nu er vi endelig klar til at bruge kædereglen for funktioner af flere variable: <span class="math display">\[\begin{align}
 \frac{\partial E}{\partial a_j^{(3)}} &amp;=  \frac{\partial E}{\partial z_1^{(4)}} \cdot \frac{\partial z_1^{(4)}}{\partial a_j^{(3)}}  + \frac{\partial E}{\partial z_2^{(4)}} \cdot \frac{\partial z_2^{(4)}}{\partial a_j^{(3)}} + \frac{\partial E}{\partial z_3^{(4)}} \cdot \frac{\partial z_3^{(4)}}{\partial a_j^{(3)}} \\
 &amp;= \sum_{k=1}^{3}\frac{\partial E}{\partial z_k^{(4)}} \cdot \frac{\partial z_k^{(4)}}{\partial a_j^{(3)}}  
-\end{align}\]</span> Se nu dukker der noget op, som vi har set før! Nemlig det fejlled, som vi definerede i (<strong>?@eq-error_term_j_4</strong>), og som vi allerede har regnet ud, da vi opdaterede vægtene og biasene i lag <span class="math inline">\(4\)</span>. Tænk lige over det - det er faktisk ret fedt! Dvs. at vi kan skrive: <span class="math display">\[\begin{align}
+\end{align}\]</span> Se nu dukker der noget op, som vi har set før! Nemlig det fejlled, som vi definerede i (<a href="#eq-error_term_j_4">27</a>), og som vi allerede har regnet ud, da vi opdaterede vægtene og biasene i lag <span class="math inline">\(4\)</span>. Tænk lige over det - det er faktisk ret fedt! Dvs. at vi kan skrive: <span id="eq-partial_E_a_j_3"><span class="math display">\[
+\begin{aligned}
 \frac{\partial E}{\partial a_j^{(3)}} &amp;= \sum_{k=1}^{3} \delta_k^{(4)} \cdot \frac{\partial z_k^{(4)}}{\partial a_j^{(3)}}  
-\end{align}\]</span> {#eq-partial_E_a_j_3} Så mangler vi kun lige at finde <span class="math inline">\(\frac{\partial z_k^{(4)}}{\partial a_j^{(3)}}\)</span>! Fra (<strong>?@eq-lag4</strong>) har vi, at <span class="math display">\[
+\end{aligned}
+\tag{30}\]</span></span> Så mangler vi kun lige at finde <span class="math inline">\(\frac{\partial z_k^{(4)}}{\partial a_j^{(3)}}\)</span>! Fra (<a href="#eq-lag4">21</a>) har vi, at <span class="math display">\[
 z_k^{(4)} = \sum_i w_{ki}^{(4)} a_i^{(3)}+b_k^{(4)}
 \]</span> så <span class="math display">\[
 \frac{\partial z_k^{(4)}}{\partial a_j^{(3)}} = \frac{\partial}{\partial a_j^{(3)}} \left(\sum_i w_{ki}^{(4)} a_i^{(3)}+b_k^{(4)} \right)
@@ -3893,22 +3896,22 @@ z_k^{(4)} = \sum_i w_{ki}^{(4)} a_i^{(3)}+b_k^{(4)}
 \frac{\partial}{\partial a_j^{(3)}}\left ( w_{kj}^{(4)} a_j^{(3)} \right) = w_{kj}^{(4)}
 \]</span> har vi altså, at <span class="math display">\[
 \frac{\partial z_k^{(4)}}{\partial a_j^{(3)}} = w_{kj}^{(4)}
-\]</span> Indsætter vi dette i (<strong>?@eq-partial_E_a_j_3</strong>), har vi nu <span class="math display">\[\begin{align}
+\]</span> Indsætter vi dette i (<a href="#eq-partial_E_a_j_3">30</a>), har vi nu <span class="math display">\[\begin{align}
 \frac{\partial E}{\partial a_j^{(3)}} = \sum_{k=1}^{3} \delta_k^{(4)} \cdot \frac{\partial z_k^{(4)}}{\partial a_j^{(3)}}  = \sum_{k=1}^{3} \delta_k^{(4)} \cdot w_{kj}^{(4)}
 \end{align}\]</span></p>
-<p>Nu skal vi i første omgang tilbage til (<a href="#eq-partial_E_z_j_3">25</a>) og indsætte det vi netop er kommet frem til: <span class="math display">\[\begin{align}
+<p>Nu skal vi i første omgang tilbage til (<a href="#eq-partial_E_z_j_3">29</a>) og indsætte det vi netop er kommet frem til: <span class="math display">\[\begin{align}
 \frac{\partial E}{\partial z_j^{(3)}}=\underbrace{\left ( \sum_{k=1}^{3} \delta_k^{(4)} \cdot w_{kj}^{(4)}\right )}_{\frac{\partial E}{\partial a_j^{(3)}}}
 \cdot \underbrace{a_j^{(3)} \cdot (1-a_j^{(3)})}_{\frac{\partial a_j^{(3)}}{\partial z_j^{(3)}}}
 \end{align}\]</span> Som vi gjorde i <a href="#sec-opdatering_lag4">afsnit 5.2.1</a>, vil vi også give dette lidt lange udtryk en særlig betegnelse, nemlig <span class="math display">\[\begin{align}
 \delta_j^{(3)} = \frac{\partial E}{\partial z_j^{(3)}}=\left ( \sum_{k=1}^{3} \delta_k^{(4)} \cdot w_{kj}^{(4)}\right )
 \cdot a_j^{(3)} \cdot (1-a_j^{(3)})
-\end{align}\]</span> Det kan vist godt være lidt svært at bevare overblikket her, men nu er vi faktisk i mål! Vi indsætter i (<a href="#eq-partialE_w_ji_3">24</a>) <span class="math display">\[\begin{align}
+\end{align}\]</span> Det kan vist godt være lidt svært at bevare overblikket her, men nu er vi faktisk i mål! Vi indsætter i (<a href="#eq-partialE_w_ji_3">28</a>) <span class="math display">\[\begin{align}
 \frac{\partial E}{\partial w_{ji}^{(3)}} &amp;= \frac{\partial E}{\partial z_j^{(3)}} \cdot \frac{\partial z_j^{(3)}}{\partial w_{ji}^{(3)}} \\
 &amp;= \delta_j^{(3)} \cdot a_i^{(2)}
 \end{align}\]</span></p>
 <p>Det er nu en smal sag at bestemme <span class="math inline">\(\frac{\partial E}{\partial b_j^{(3)}}\)</span>, da <span class="math display">\[\begin{align}
 \frac{\partial E}{\partial b_j^{(3)}} &amp;= \frac{\partial E}{\partial z_j^{(3)}} \cdot \frac{\partial z_j^{(3)}}{\partial b_j^{(3)}} \\ &amp;= \delta_j^{(3)}\cdot \frac{\partial z_j^{(3)}}{\partial b_j^{(3)}}
-\end{align}\]</span> Fra (<strong>?@eq-lag3</strong>) har vi, at <span class="math display">\[
+\end{align}\]</span> Fra (<a href="#eq-lag3">20</a>) har vi, at <span class="math display">\[
 z_j^{(3)} = \sum_{i=1}^3 w_{ji}^{(3)} a_i^{(2)} + b_j^{(3)}
 \]</span> og derfor er <span class="math display">\[
 \frac{\partial z_j^{(3)}}{\partial b_j^{(3)}} = 1
@@ -3925,16 +3928,16 @@ Opdateringsregler til vægte og bias i lag 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Vægtene i outputlaget opdateres på denne måde: <span class="math display">\[\begin{align}
+<p>Vægtene i outputlaget opdateres på denne måde: <span class="math display">\[
 w_{ji}^{(3)} \leftarrow w_{ji}^{(3)} - \eta \cdot \delta_j^{(3)} \cdot a_i^{(2)}
-\end{align}\]</span> Biasene i outputlaget opdateres på denne måde: <span class="math display">\[\begin{align}
+\]</span> Biasene i outputlaget opdateres på denne måde: <span class="math display">\[
 b_j^{(3)} \leftarrow b_j^{(3)} - \eta \cdot \delta_j^{(3)}
-\end{align}\]</span> hvor <span class="math display">\[\begin{align}
+\]</span> hvor <span id="eq-error_term_j_3"><span class="math display">\[
 \delta_j^{(3)} = \frac{\partial E}{\partial z_j^{(3)}}=\left( \sum_{k=1}^{3}\delta_k^{(4)} \cdot w_{kj}^{(4)}   \right) \cdot a_j^{(3)} \cdot (1-a_j^{(3)})
-\end{align}\]</span> {#eq-error_term_j_3}</p>
+\tag{31}\]</span></span></p>
 </div>
 </div>
-<p>Bemærk, at udgangspunktet for ovenstående er, at vi først har lavet et feedforward i netværket, så vi har alle <span class="math inline">\(a_i^{(2)}\)</span>- og <span class="math inline">\(a_j^{(3)}\)</span>-værdier. Derudover har vi allerede opdateret vægtene og biasene i lag <span class="math inline">\(4\)</span>. Derfor kender vi også fejleddene <span class="math inline">\(\delta_k^{(4)}\)</span> fra lag <span class="math inline">\(4\)</span>, som indgår i beregningen af <span class="math inline">\(\delta_j^{(3)}\)</span> i (<strong>?@eq-error_term_j_3</strong>). Altså er det muligt at foretage de beregninger, som opdateringsreglerne i lag <span class="math inline">\(3\)</span> kræver.</p>
+<p>Bemærk, at udgangspunktet for ovenstående er, at vi først har lavet et feedforward i netværket, så vi har alle <span class="math inline">\(a_i^{(2)}\)</span>- og <span class="math inline">\(a_j^{(3)}\)</span>-værdier. Derudover har vi allerede opdateret vægtene og biasene i lag <span class="math inline">\(4\)</span>. Derfor kender vi også fejleddene <span class="math inline">\(\delta_k^{(4)}\)</span> fra lag <span class="math inline">\(4\)</span>, som indgår i beregningen af <span class="math inline">\(\delta_j^{(3)}\)</span> i (<a href="#eq-error_term_j_3">31</a>). Altså er det muligt at foretage de beregninger, som opdateringsreglerne i lag <span class="math inline">\(3\)</span> kræver.</p>
 </section>
 <section id="sec-opdatering_lag2" class="level3">
 <h3 class="anchored" data-anchor-id="sec-opdatering_lag2">Opdateringsregler for lag <span class="math inline">\(2\)</span></h3>
@@ -3951,19 +3954,19 @@ w_{ji}^{(2)} &amp; \rightarrow &amp; z_j^{(2)} \rightarrow a_j^{(2)} &amp;  &amp
 \end{matrix}
 \]</span> Vi kan nu igen skrive <span id="eq-partialE_w_ji_2"><span class="math display">\[
 \frac{\partial E}{\partial w_{ji}^{(2)}} = \frac{\partial E}{\partial z_j^{(2)}} \cdot \frac{\partial z_j^{(2)}}{\partial w_{ji}^{(2)}}
-\tag{26}\]</span></span> Helt analogt til tidligere ses det nemt, at <span class="math display">\[
+\tag{32}\]</span></span> Helt analogt til tidligere ses det nemt, at <span class="math display">\[
 \frac{\partial z_j^{(2)}}{\partial w_{ji}^{(2)}} = a_i^{(1)}
 \]</span> og kædreglen giver igen, at <span id="eq-partial_E_z_j_2"><span class="math display">\[
 \frac{\partial E}{\partial z_j^{(2)}}= \frac{\partial E}{\partial a_j^{(2)}} \cdot
 \frac{\partial a_j^{(2)}}{\partial z_j^{(2)}}
-\tag{27}\]</span></span> Her fås også uden problemer, at den sidste faktor kan skrives som <span class="math display">\[
+\tag{33}\]</span></span> Her fås også uden problemer, at den sidste faktor kan skrives som <span class="math display">\[
 \frac{\partial a_j^{(2)}}{\partial z_j^{(2)}} = a_j^{(2)} \cdot (1-a_j^{(2)})
 \]</span> og bruger man kædereglen for funktioner af flere variable, kommer man frem til, at <span class="math display">\[\begin{align}
 \frac{\partial E}{\partial a_j^{(2)}} &amp;= \sum_{k=1}^2 \frac{\partial E}{\partial z_k^{(3)}}
 \cdot \frac{\partial  z_k^{(3)}}{\partial a_j^{(2)}} \\
 &amp;= \sum_{k=1}^2  \delta_k^{(3)} w_{kj}^{(3)},
 \end{align}\]</span> hvor vi allerede har udregnet <span class="math inline">\(\delta_k^{(3)}\)</span>, da vi opdaterede vægtene og biasene i lag <span class="math inline">\(3\)</span>.</p>
-<p>Indsætter vi i (<a href="#eq-partial_E_z_j_2">27</a>) og samtidig definerer fejlleddet <span class="math inline">\(\delta_j^{(2)}\)</span> for det andet lag, får vi <span class="math display">\[
+<p>Indsætter vi i (<a href="#eq-partial_E_z_j_2">33</a>) og samtidig definerer fejlleddet <span class="math inline">\(\delta_j^{(2)}\)</span> for det andet lag, får vi <span class="math display">\[
 \delta_j^{(2)} = \frac{\partial E}{\partial z_j^{(2)}} = \left ( \sum_{k=1}^2  \delta_k^{(3)} w_{kj}^{(3)} \right ) \cdot a_j^{(2)} \cdot (1-a_j^{(2)})
 \]</span> Alt i alt ender vi med <span class="math display">\[\begin{align}
 \frac{\partial E}{\partial w_{ji}^{(2)}} &amp;= \delta_j^{(2)} \cdot a_i^{(1)} \\
@@ -4072,11 +4075,11 @@ Feedforwardligninger - helt generelt
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Beregn først: <span class="math display">\[\begin{align}
+<p>Beregn først: <span id="eq-z_j_k_generelt"><span class="math display">\[
 z_j^{(k)} = \sum_{i} w_{ji}^{(k)} a_i^{(k-1)} +  b_j^{(k)}
-\end{align}\]</span> {#eq-z_j_k_generelt} Outputværdierne for neuroner i det <span class="math inline">\(k\)</span>’te lag udregnes dernæst på denne måde: <span class="math display">\[\begin{align}
-a_j^{(k)} &amp;= \sigma(z_j^{(k)})
-\end{align}\]</span> {#eq-a_j_k_generelt} for <span class="math inline">\(k \in \{2, 3, \dots, K \}\)</span>.</p>
+\tag{34}\]</span></span> Outputværdierne for neuroner i det <span class="math inline">\(k\)</span>’te lag udregnes dernæst på denne måde: <span id="eq-a_j_k_generelt"><span class="math display">\[
+a_j^{(k)} = \sigma(z_j^{(k)})
+\tag{35}\]</span></span> for <span class="math inline">\(k \in \{2, 3, \dots, K \}\)</span>.</p>
 </div>
 </div>
 <p>Hvis vi også kalder outputværdierne fra netværket for <span class="math display">\[
@@ -4101,19 +4104,19 @@ E= \frac{1}{2} \sum_{i=1}^{n_K} \left ( t_i - a_i^{(K)} \right )^2,
 w_{ji}^{(K)} \rightarrow z_j^{(K)} \rightarrow a_j^{(K)} \rightarrow E
 \]</span> Derfor får vi <span id="eq-partialE_w_ji_K"><span class="math display">\[
 \frac{\partial E}{\partial w_{ji}^{(K)}} = \frac{\partial E}{\partial z_j^{(K)}} \cdot \frac{\partial z_j^{(K)}}{\partial w_{ji}^{(K)}}
-\tag{28}\]</span></span> På grund feedforwardligningen i (<strong>?@eq-z_j_k_generelt</strong>) får vi for det første, at <span id="eq-partial_z_j_K_w_ji_K"><span class="math display">\[
+\tag{36}\]</span></span> På grund feedforwardligningen i (<a href="#eq-z_j_k_generelt">34</a>) får vi for det første, at <span id="eq-partial_z_j_K_w_ji_K"><span class="math display">\[
 \frac{\partial z_j^{(K)}}{\partial w_{ji}^{(K)}} = a_i^{(K-1)}
-\tag{29}\]</span></span> Nu bruger vi kædereglen til at bestemme <span id="eq-partial_E_z_j_K_generelt"><span class="math display">\[
+\tag{37}\]</span></span> Nu bruger vi kædereglen til at bestemme <span id="eq-partial_E_z_j_K_generelt"><span class="math display">\[
 \frac{\partial E}{\partial z_j^{(K)}} = \frac{\partial E}{\partial a_j^{(K)}} \cdot  \frac{\partial a_j^{(K)}}{\partial z_j^{(K)}}
-\tag{30}\]</span></span> På grund af feedforwardligningen i (<strong>?@eq-a_j_k_generelt</strong>) og <a href="#thm-sigmoid_diff">sætning 1</a> får vi sidste faktor til <span class="math display">\[
+\tag{38}\]</span></span> På grund af feedforwardligningen i (<a href="#eq-a_j_k_generelt">35</a>) og <a href="#thm-sigmoid_diff">sætning 1</a> får vi sidste faktor til <span class="math display">\[
 \frac{\partial a_j^{(K)}}{\partial z_j^{(K)}}  =  a_j^{(K)}\cdot (1-a_j^{(K)})
 \]</span> Endelig får vi, ved at differentiere tabsfunktionen med hensyn til <span class="math inline">\(a_j^{(K)}\)</span> <span class="math display">\[
 \frac{\partial E}{\partial a_j^{(K)}} = -(t_j-a_j^{(K)})
 \]</span> Vi definerer nu igen fejlleddet for outputlaget <span class="math inline">\(\delta_j^{(K)}\)</span>, som tidligere <span class="math display">\[
 \delta_j^{(K)} = \frac{\partial E}{\partial z_j^{(K)}}
-\]</span> og indsætter vi det, vi netop har udledt, i (<a href="#eq-partial_E_z_j_K_generelt">30</a>) får vi <span class="math display">\[
+\]</span> og indsætter vi det, vi netop har udledt, i (<a href="#eq-partial_E_z_j_K_generelt">38</a>) får vi <span class="math display">\[
 \delta_j^{(K)} =  -(t_j-a_j^{(K)}) \cdot a_j^{(K)} \cdot (1-a_j^{(K)})
-\]</span> Indsætter vi nu det hele i (<a href="#eq-partialE_w_ji_K">28</a>), har vi altså: <span class="math display">\[
+\]</span> Indsætter vi nu det hele i (<a href="#eq-partialE_w_ji_K">36</a>), har vi altså: <span class="math display">\[
 \frac{\partial E}{\partial w_{ji}^{(K)}} = \delta_j^{(K)}  \cdot a_i^{(K-1)}
 \]</span> Det er ikke svært at overbevise sig selv om, at <span class="math display">\[
 \frac{\partial E}{\partial b_j^{(K)}} = \delta_j^{(K)}
@@ -4150,27 +4153,27 @@ w_{ji}^{(k)} &amp; \rightarrow &amp; z_j^{(k)} \rightarrow a_j^{(k)} &amp; \righ
 &amp; &amp; &amp; \searrow &amp; \vdots &amp;  \nearrow &amp;  \\
 &amp; &amp; &amp; &amp; z_{n_{k+1}}^{(k+1)} &amp; &amp; \\
 \end{matrix}
-\tag{31}\]</span></span> Vi starter som tidligere med at bruge kædereglen én gang: <span id="eq-partialE_w_ji_k"><span class="math display">\[
+\tag{39}\]</span></span> Vi starter som tidligere med at bruge kædereglen én gang: <span id="eq-partialE_w_ji_k"><span class="math display">\[
 \frac{\partial E}{\partial w_{ji}^{(k)}} = \frac{\partial E}{\partial z_j^{(k)}} \cdot \frac{\partial z_j^{(k)}}{\partial w_{ji}^{(k)}}
-\tag{32}\]</span></span> Fra feedforwardligningen i (<strong>?@eq-z_j_k_generelt</strong>) får vi for det første, at <span class="math display">\[
+\tag{40}\]</span></span> Fra feedforwardligningen i (<a href="#eq-z_j_k_generelt">34</a>) får vi for det første, at <span class="math display">\[
 \frac{\partial z_j^{(k)}}{\partial w_{ji}^{(k)}} = a_i^{(k-1)}
 \]</span> Endnu en anvendelse af kædereglen, og hvor vi også i samme hug definerer fejlleddet <span class="math inline">\(\delta_j^{(k)}\)</span> for det <span class="math inline">\(k\)</span>’te skjulte lag, giver: <span id="eq-partial_E_z_j_k"><span class="math display">\[
 \delta_j^{(k)} = \frac{\partial E}{\partial z_j^{(k)}}= \frac{\partial E}{\partial a_j^{(k)}} \cdot
 \frac{\partial a_j^{(k)}}{\partial z_j^{(k)}}
-\tag{33}\]</span></span> Den sidste partielle afledede kan vi udlede fra feedforwardligningen (<strong>?@eq-a_j_k_generelt</strong>) og <a href="#thm-sigmoid_diff">sætning 1</a>: <span class="math display">\[
+\tag{41}\]</span></span> Den sidste partielle afledede kan vi udlede fra feedforwardligningen (<a href="#eq-a_j_k_generelt">35</a>) og <a href="#thm-sigmoid_diff">sætning 1</a>: <span class="math display">\[
 \frac{\partial a_j^{(k)}}{\partial z_j^{(k)}} = a_j^{(k)} \cdot (1-a_j^{(k)})
-\]</span> For at beregne <span class="math inline">\(\frac{\partial E}{\partial a_j^{(k)}}\)</span> må vi have fat i kædereglen for funktioner af flere variable (se illustrationen i (<a href="#eq-dep_E_w_ji_k">31</a>): <span class="math display">\[\begin{align}
+\]</span> For at beregne <span class="math inline">\(\frac{\partial E}{\partial a_j^{(k)}}\)</span> må vi have fat i kædereglen for funktioner af flere variable (se illustrationen i (<a href="#eq-dep_E_w_ji_k">39</a>): <span class="math display">\[\begin{align}
 \frac{\partial E}{\partial a_j^{(k)}} = \sum_{i=1}^{n_{k+1}} \frac{\partial E}{\partial z_i^{(k+1)}}
 \cdot \frac{\partial  z_i^{(k+1)}}{\partial a_j^{(k)}}
 \end{align}\]</span> Vi udnytter nu, at vi allerede kender fejlleddene fra lag <span class="math inline">\(k+1\)</span> og kan derfor omskrive til <span class="math display">\[\begin{align}
 \frac{\partial E}{\partial a_j^{(k)}} = \sum_{i=1}^{n_{k+1}} \delta_i^{(k+1)}
 \cdot \frac{\partial  z_i^{(k+1)}}{\partial a_j^{(k)}}
-\end{align}\]</span> Endelig får vi fra feedforwardligningen (<strong>?@eq-z_j_k_generelt</strong>), at <span class="math display">\[\begin{align}
+\end{align}\]</span> Endelig får vi fra feedforwardligningen (<a href="#eq-z_j_k_generelt">34</a>), at <span class="math display">\[\begin{align}
 \frac{\partial  z_i^{(k+1)}}{\partial a_j^{(k)}} = w_{ij}^{(k)}
 \end{align}\]</span> og derfor er <span class="math display">\[\begin{align}
 \frac{\partial E}{\partial a_j^{(k)}} = \sum_{i=1}^{n_{k+1}} \delta_i^{(k+1)}
 \cdot w_{ij}^{(k)}
-\end{align}\]</span> Ved at indsætte i (<a href="#eq-partial_E_z_j_k">33</a>) får vi nu fejlleddet i det <span class="math inline">\(k\)</span>’te lag <span class="math display">\[
+\end{align}\]</span> Ved at indsætte i (<a href="#eq-partial_E_z_j_k">41</a>) får vi nu fejlleddet i det <span class="math inline">\(k\)</span>’te lag <span class="math display">\[
 \delta_j^{(k)} = \frac{\partial E}{\partial z_j^{(k)}}=  \left ( \sum_{i=1}^{n_{k+1}} \delta_i^{(k+1)} \cdot w_{ij}^{(k)} \right) \cdot a_j^{(k)} \cdot (1-a_j^{(k)})
 \]</span> Altså er <span class="math display">\[\begin{align}
 \frac{\partial E}{\partial w_{ji}^{(k)}} = \delta_j^{(k)} \cdot a_i^{(k-1)}
@@ -4203,30 +4206,30 @@ b_j^{(k)} \leftarrow b_j^{(k)} - \eta \cdot \delta_j^{(k)}
 <p>Vi har faktisk snydt lidt… Okay – indrømmet – det er lidt træls at komme at sige nu! Men i alt hvad vi har lavet indtil nu, har vi kun kigget på ét træningseksempel. Vi har ladet inputværdierne for det ene træningseksempel &quot;kører igennem&quot; netværket (feedforward), beregnet tabsfunktionen og brugt resultatet herfra til at opdatere alle vægtene (backpropagation). Men vi har jo ikke kun ét træningseksempel. Vi har faktisk rigtig mange! Måske ligefrem tusindvis af træningsdata. Men hvad gør man så?</p>
 <p>Lad os lige genopfriske den tabsfunktion, som vi endte med i det helt generelle tilfælde: <span id="eq-E_singletraining"><span class="math display">\[
 E= \frac{1}{2} \sum_{i=1}^{n_K} \left ( t_i - a_i^{(K)} \right )^2.
-\tag{34}\]</span></span> Her er <span class="math inline">\(t_i\)</span> target-værdien for den <span class="math inline">\(i\)</span>’te outputneuron for lige præcis det træningseksempel vi står med. Husk på at et givet træningseksempel består af inputværdierne <span class="math display">\[
+\tag{42}\]</span></span> Her er <span class="math inline">\(t_i\)</span> target-værdien for den <span class="math inline">\(i\)</span>’te outputneuron for lige præcis det træningseksempel vi står med. Husk på at et givet træningseksempel består af inputværdierne <span class="math display">\[
 x_1, x_2, \dots, x_{n_1}
 \]</span> <em>og</em> de ønskede target-værdier <span class="math display">\[
 t_1, t_2, \dots, t_{n_K}.
 \]</span> Når vi kører disse inputværdier igennem netværket, får de selvfølgelig i sidste ende direkte betydning for outputværdierne i det sidste lag (<span class="math inline">\(K\)</span>): <span class="math display">\[
 a_1^{(K)}, a_2^{(K)}, \cdots, a_{n_K}^{(K)}.
-\]</span> Det vil sige, at i vores tabsfunktion i (<a href="#eq-E_singletraining">34</a>), så afhænger både <span class="math inline">\(t_i\)</span>’erne og <span class="math inline">\(a_i^{(K)}\)</span>’erne af træningseksemplet. Hvis vi sådan lidt generelt benævner vores træningseksempel med <span class="math inline">\(x\)</span>, så vil det kunne udtrykkes sådan her: <span class="math display">\[
+\]</span> Det vil sige, at i vores tabsfunktion i (<a href="#eq-E_singletraining">42</a>), så afhænger både <span class="math inline">\(t_i\)</span>’erne og <span class="math inline">\(a_i^{(K)}\)</span>’erne af træningseksemplet. Hvis vi sådan lidt generelt benævner vores træningseksempel med <span class="math inline">\(x\)</span>, så vil det kunne udtrykkes sådan her: <span class="math display">\[
 E_x= \frac{1}{2} \sum_{i=1}^{n_K} \left ( t_{x,i} - a_{x,i}^{(K)} \right )^2,
 \]</span> hvor så <span class="math inline">\(t_{x,i}\)</span> er target-værdien for den <span class="math inline">\(i\)</span>’te outputneuron fra træningsdata <span class="math inline">\(x\)</span> og <span class="math inline">\(a_{x,i}^{(K)}\)</span> er outputværdien for den <span class="math inline">\(i\)</span>’te outputneuron, som er beregnet på baggrund af inputværdierne fra træningsdata <span class="math inline">\(x\)</span>.</p>
 <p>Den samlede tabsfunktion, som er den, vi i virkeligheden ønsker at minimere, bliver så gennemsnittet af tabsfunktionerne hørende til de enkelte træningsdata: <span id="eq-E_generel"><span class="math display">\[
 E = \frac{1}{n} \sum_x E_x= \frac{1}{n} \sum_x \left ( \frac{1}{2} \sum_{i=1}^{n_K} \left ( t_{x,i} - a_{x,i}^{(K)} \right )^2 \right ).
-\tag{35}\]</span></span> Husk på at vi er ude efter <span class="math display">\[
+\tag{43}\]</span></span> Husk på at vi er ude efter <span class="math display">\[
 \frac{\partial E}{\partial w_{ji}^{(k)}} \quad \text{og} \quad \frac{\partial E}{\partial b_j^{(k)}}
-\]</span> for <span class="math inline">\(k \in \{2, 3, \dots, K\}\)</span> og hvor <span class="math inline">\(E\)</span> nu er summen i (<a href="#eq-E_generel">35</a>). Heldigvis kan vi differentiere ledvis, og der gælder derfor <span class="math display">\[
+\]</span> for <span class="math inline">\(k \in \{2, 3, \dots, K\}\)</span> og hvor <span class="math inline">\(E\)</span> nu er summen i (<a href="#eq-E_generel">43</a>). Heldigvis kan vi differentiere ledvis, og der gælder derfor <span class="math display">\[
 \frac{\partial E}{\partial w_{ji}^{(k)}} = \frac{1}{n} \sum_x \frac{\partial E_x}{\partial w_{ji}^{(k)}}
 \]</span> og tilsvarende <span class="math display">\[
 \frac{\partial E}{\partial b_j^{(k)}} = \frac{1}{n} \sum_x \frac{\partial E_x}{\partial b_j^{(k)}}
 \]</span> Det kommer så til at betyde, at opdateringsreglerne nu generelt bliver på formen <span id="eq-opdatering_w_ji_alledata"><span class="math display">\[
 w_{ji}^{(k)} \leftarrow w_{ji}^{(k)}-\eta \cdot \frac{\partial E}{\partial w_{ji}^{(k)}}  =
 w_{ji}^{(k)}-\eta \cdot \frac{1}{n} \sum_x \frac{\partial E_x}{\partial w_{ji}^{(k)}}
-\tag{36}\]</span></span> og tilsvarende for biasene <span id="eq-opdatering_b_j_alledata"><span class="math display">\[
+\tag{44}\]</span></span> og tilsvarende for biasene <span id="eq-opdatering_b_j_alledata"><span class="math display">\[
 b_j^{(k)} \leftarrow b_j^{(k)} -\eta \cdot \frac{\partial E}{\partial b_j^{(k)}}  =
 b_j^{(k)}-\eta \cdot \frac{1}{n} \sum_x \frac{\partial E_x}{\partial b_j^{(k)}}
-\tag{37}\]</span></span> Alle leddene <span class="math inline">\(\frac{\partial E_x}{\partial w_{ji}^{(k)}}\)</span> og <span class="math inline">\(\frac{\partial E_x}{\partial b_j^{(k)}}\)</span>, som indgår i opdateringsreglerne, svarer netop til hvad vi har udledt i de foregående afsnit, fordi vi jo netop her kun så på ét træningseksempel ad gangen. Hvis vi overfører dette til opdateringsreglerne i outputlaget, så vil vi f.eks. få</p>
+\tag{45}\]</span></span> Alle leddene <span class="math inline">\(\frac{\partial E_x}{\partial w_{ji}^{(k)}}\)</span> og <span class="math inline">\(\frac{\partial E_x}{\partial b_j^{(k)}}\)</span>, som indgår i opdateringsreglerne, svarer netop til hvad vi har udledt i de foregående afsnit, fordi vi jo netop her kun så på ét træningseksempel ad gangen. Hvis vi overfører dette til opdateringsreglerne i outputlaget, så vil vi f.eks. få</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -4248,7 +4251,7 @@ b_j^{(K)} \leftarrow b_j^{(K)} - \eta \cdot \frac{1}{n} \sum_x \left ( \delta_{x
 </div>
 <p>Og helt tilsvarende vil det se ud for opdateringsreglerne i de skjulte lag.</p>
 <p>Lad os lige dvæle lidt ved, hvad det her, det egentlig betyder. Lad os sige at vi har <span class="math inline">\(1000\)</span> træningsdata. Så skal vi lade de <span class="math inline">\(1000\)</span> træningsdata kører igennem netværket, så vi kan beregne de <span class="math inline">\(1000\)</span> led, som indgår i de ovenstående summer. Herefter kan vi opdatere alle vægte og bias én gang. Det vil blot være ét lille skridt på vej ned i dalen mod det lokale minimum, som vi er på jagt efter. Dette lille skridt skal gentages rigtig mange gange indtil værdierne af alle vægte og bias ser ud til at begynde at konvergere – svarende til at vi har ramt det lokale minimum.</p>
-<p>Så selvom gradientnedstigning kan bruges til at finde et lokalt minimum for tabsfunktionen <span class="math inline">\(E\)</span>, så er det faktisk også en beregningsmæssig stor og tung opgave! Derfor er der forsket meget videre i at gøre det endnu bedre og endnu hurtigere. I algoritmer som disse er der ofte et trade-off: Man kan gøre noget hurtigere ved at bruge mere hukommelse – eller bruge mindre hukommelse ved at gøre det en smule langsommere. En af de teknikker, der er kommet ud af den forskning, er, at man kan bruge mindre hukommelse ved i hvert opdateringsskridt kun at bruge en tilfældigt udvalgt del af træningsdata – det kunne f.eks. være <span class="math inline">\(10\%\)</span> af alle træningsdata. Så vil man i hvert skridt stadig bruge opdateringsreglerne i (<a href="#eq-opdatering_w_ji_alledata">36</a>) og (<a href="#eq-opdatering_b_j_alledata">37</a>), men hvor der nu kun summeres over de <span class="math inline">\(10 \%\)</span> af træningsdatene. Hver gang man laver et nyt opdateringsskridt, vil man tage en ny tilfældigt udvalgt del af træningsdata. Denne teknik kalder man <em>stokastisk gradientnedstigning</em> (stochastic gradient descent). Og der er endnu flere af sådanne små ændringer, der enten gør algoritmen hurtigere eller at den bruger mindre hukommelse. Det vil komme an på den enkelte anvendelse, hvad der er vigtigst her.</p>
+<p>Så selvom gradientnedstigning kan bruges til at finde et lokalt minimum for tabsfunktionen <span class="math inline">\(E\)</span>, så er det faktisk også en beregningsmæssig stor og tung opgave! Derfor er der forsket meget videre i at gøre det endnu bedre og endnu hurtigere. I algoritmer som disse er der ofte et trade-off: Man kan gøre noget hurtigere ved at bruge mere hukommelse – eller bruge mindre hukommelse ved at gøre det en smule langsommere. En af de teknikker, der er kommet ud af den forskning, er, at man kan bruge mindre hukommelse ved i hvert opdateringsskridt kun at bruge en tilfældigt udvalgt del af træningsdata – det kunne f.eks. være <span class="math inline">\(10\%\)</span> af alle træningsdata. Så vil man i hvert skridt stadig bruge opdateringsreglerne i (<a href="#eq-opdatering_w_ji_alledata">44</a>) og (<a href="#eq-opdatering_b_j_alledata">45</a>), men hvor der nu kun summeres over de <span class="math inline">\(10 \%\)</span> af træningsdatene. Hver gang man laver et nyt opdateringsskridt, vil man tage en ny tilfældigt udvalgt del af træningsdata. Denne teknik kalder man <em>stokastisk gradientnedstigning</em> (stochastic gradient descent). Og der er endnu flere af sådanne små ændringer, der enten gør algoritmen hurtigere eller at den bruger mindre hukommelse. Det vil komme an på den enkelte anvendelse, hvad der er vigtigst her.</p>
 </section>
 </section>
 <section id="valg-af-tabsfunktion" class="level1 page-columns page-full">
@@ -4267,10 +4270,10 @@ w_1 \leftarrow w_1 + \eta  \cdot (t-o) \cdot o \cdot (1-o) \cdot z_1
 <p>Problemet opstår, hvis startvægtene fejlagtigt kommer til at give en outputværdi <span class="math inline">\(o\)</span>, som enten er tæt på <span class="math inline">\(0\)</span> eller <span class="math inline">\(1\)</span>. Hvis det sker, vil <span class="math inline">\(t-o\)</span> være &quot;stor&quot; (fordi outputværdien er fejlagtig), men samtidig vil faktoren <span class="math inline">\(o \cdot (1-o)\)</span> være tæt på <span class="math inline">\(0\)</span> (fordi <span class="math inline">\(o\)</span> enten er tæt på <span class="math inline">\(0\)</span> eller på <span class="math inline">\(1\)</span>). Derfor kan vi risikere, at <span class="math inline">\(w_1\)</span>-vægten ikke bliver opdateret særlig meget, fordi <span class="math inline">\(t-o\)</span> bliver ganget med et tal, som er tæt på <span class="math inline">\(0\)</span>. Sker dette kalder man det for <em>slow learning</em>.</p>
 <p>Nu kunne man måske godt tænke, at det da ikke har noget med tabsfunktionen at gøre, men det har lige præcis noget med tabsfunktionen <em>i kombination</em> med sigmoid-funktionen at gøre. For at se det må vi genkalde os, hvor ovenstående opdateringsregel kom fra. Faktisk svarede <span class="math inline">\(t-o\)</span> til <span class="math inline">\(-dE/do\)</span> og <span class="math inline">\(o \cdot (1-o)\)</span> var sigmoid-funktionen <span class="math inline">\(\sigma(w_0+w_1 \cdot z_1 + w_2 \cdot z_2)\)</span> differentieret. Det vil sige: <span id="eq-opdatering_w1_med_forklaring"><span class="math display">\[
 w_1 \leftarrow w_1 + \eta  \cdot \underbrace{(t-o)}_{-dE/do} \cdot \underbrace{o \cdot (1-o)}_{\sigma&#39;(\cdots)} \cdot z_1
-\tag{38}\]</span></span> Hvis man derimod kunne vælge en tabsfunktion, som passer bedre sammen med sigmoid-funktionen, på den måde at forstå, at faktoren <span class="math inline">\(o \cdot (1-o)\)</span> ville forkorte ud i ovenstående udtryk, så ville man slippe af med problemet omkring langsom læring.</p>
+\tag{46}\]</span></span> Hvis man derimod kunne vælge en tabsfunktion, som passer bedre sammen med sigmoid-funktionen, på den måde at forstå, at faktoren <span class="math inline">\(o \cdot (1-o)\)</span> ville forkorte ud i ovenstående udtryk, så ville man slippe af med problemet omkring langsom læring.</p>
 <p>Nok ikke helt overraskende så kan man faktisk godt diske op med en sådan tabsfunktion! Den tabsfunktion, som passer godt sammen med sigmoid-funktionen, kaldes for <em>cross-entropy</em> tabsfunktionen og er defineret sådan her <span id="eq-cross_entropy"><span class="math display">\[
 E = - \left ( t \cdot \ln(o)+(1-t) \cdot \ln(1-o) \right )
-\tag{39}\]</span></span> Det ser jo ikke umiddelbart videre behageligt ud, og det er slet ikke oplagt, at det overhovedet er en tabsfunktion. Det vil sige, opfylder cross-entropy tabsfunktionen betingelserne listet ovenfor? Lad os starte med at undersøge om <span class="math inline">\(E&gt;0\)</span>. For det første er target-værdien <span class="math inline">\(t\)</span> altid enten <span class="math inline">\(0\)</span> eller <span class="math inline">\(1\)</span>. Derfor er der følgende to muligheder: <span class="math display">\[\begin{align}
+\tag{47}\]</span></span> Det ser jo ikke umiddelbart videre behageligt ud, og det er slet ikke oplagt, at det overhovedet er en tabsfunktion. Det vil sige, opfylder cross-entropy tabsfunktionen betingelserne listet ovenfor? Lad os starte med at undersøge om <span class="math inline">\(E&gt;0\)</span>. For det første er target-værdien <span class="math inline">\(t\)</span> altid enten <span class="math inline">\(0\)</span> eller <span class="math inline">\(1\)</span>. Derfor er der følgende to muligheder: <span class="math display">\[\begin{align}
 t=0: &amp; \quad  E=- \ln(1-o)\\
 t=1: &amp; \quad E=- \ln(o)
 \end{align}\]</span> Vi ved også, at outputværdien <span class="math inline">\(o\)</span> ligger mellem <span class="math inline">\(0\)</span> og <span class="math inline">\(1\)</span>. Altså <span class="math inline">\(0&lt;o&lt;1\)</span>. Derfor vil også <span class="math inline">\(1-o\)</span> ligge mellem <span class="math inline">\(0\)</span> og <span class="math inline">\(1\)</span>. På <a href="#fig-graf_ln">figur 11</a> ses grafen for den naturlige logaritmefunktion <span class="math inline">\(\ln(x)\)</span>. Her ser vi, at hvis <span class="math inline">\(0&lt;x&lt;1\)</span>, så vil <span class="math inline">\(\ln(x)\)</span> være negativ. Derfor kan vi fra ovenstående udtryk se, at <span class="math inline">\(E\)</span> vil være positiv (fordi både <span class="math inline">\(\ln (1-o)\)</span> og <span class="math inline">\(\ln(o)\)</span> vil være negative).</p>
@@ -4289,7 +4292,7 @@ E = - \left ( \underbrace{t}_{=0} \cdot \ln(o)+\underbrace{(1-t)}_{= 1} \cdot \u
 \]</span> hvor vi bruger, at <span class="math inline">\(\ln(x) \thickapprox 0\)</span>, hvis <span class="math inline">\(x \thickapprox 1\)</span> (se <a href="#fig-graf_ln">figur 11</a>). Alt i alt får vi i dette tilfælde, at <span class="math inline">\(E\)</span> er tæt på <span class="math inline">\(0\)</span>. Hvis derimod <span class="math inline">\(t=1\)</span> og netværket er godt, så <span class="math inline">\(o\)</span> er tæt på <span class="math inline">\(1\)</span>, så får vi: <span class="math display">\[
 E = - \left ( \underbrace{t}_{=1} \cdot \underbrace{\ln(o)}_{\thickapprox 0}+\underbrace{(1-t)}_{=0} \cdot \ln(1-o) \right )
 \]</span> Igen får vi også i dette tilfælde, at <span class="math inline">\(E\)</span> er tæt på <span class="math inline">\(0\)</span>. På tilsvarende vis kan man argumentere for, at hvis netværket er dårligt, så enten <span class="math inline">\(t=0\)</span> og <span class="math inline">\(o \thickapprox 1\)</span> eller <span class="math inline">\(t=1\)</span> og <span class="math inline">\(o \thickapprox 0\)</span>, så vil <span class="math inline">\(E\)</span> blive stor.</p>
-<div class="page-columns page-full"><p>Alt i alt er vi altså kommet frem til, at cross-entropy tabsfunktionen opfylder betingelserne ovenfor og dermed, at cross-entropy tabsfunktionen rent faktisk <em>er</em> en tabsfunktion! Så langt så godt! Nu mangler vi at vise, at cross-entropy tabsfunktionen løser det potentielle problem omkring langsom læring. Det gør vi ved at finde et nyt udtryk for opdatering af <span class="math inline">\(w_1\)</span>-vægten. Hvis vi ser på udtrykket i (<a href="#eq-opdatering_w1_med_forklaring">38</a>), så skal vi bare have fundet et nyt udtryk for <span class="math inline">\(dE/do\)</span>, da vi holder fast i sigmoid aktiveringsfunktionen. Så lad os differentiere cross-entropy tabsfunktionen defineret i (<a href="#eq-cross_entropy">39</a>) med hensyn til <span class="math inline">\(o\)</span>: <span class="math display">\[
+<div class="page-columns page-full"><p>Alt i alt er vi altså kommet frem til, at cross-entropy tabsfunktionen opfylder betingelserne ovenfor og dermed, at cross-entropy tabsfunktionen rent faktisk <em>er</em> en tabsfunktion! Så langt så godt! Nu mangler vi at vise, at cross-entropy tabsfunktionen løser det potentielle problem omkring langsom læring. Det gør vi ved at finde et nyt udtryk for opdatering af <span class="math inline">\(w_1\)</span>-vægten. Hvis vi ser på udtrykket i (<a href="#eq-opdatering_w1_med_forklaring">46</a>), så skal vi bare have fundet et nyt udtryk for <span class="math inline">\(dE/do\)</span>, da vi holder fast i sigmoid aktiveringsfunktionen. Så lad os differentiere cross-entropy tabsfunktionen defineret i (<a href="#eq-cross_entropy">47</a>) med hensyn til <span class="math inline">\(o\)</span>: <span class="math display">\[
 \frac{dE}{do}= - \left ( t \cdot \frac{1}{o}-(1-t) \cdot \frac{1}{1-o} \right ),
 \]</span> hvor vi har husket, at <span class="math inline">\(\ln(1-o)\)</span> er en sammensat funktion. Vi sætter nu på fælles brøkstreg <span class="math display">\[\begin{align}
 \frac{dE}{do} &amp;= -  \frac{t \cdot (1-o) - o \cdot (1-t)}{o \cdot (1-o)}  \\
@@ -4297,7 +4300,7 @@ E = - \left ( \underbrace{t}_{=1} \cdot \underbrace{\ln(o)}_{\thickapprox 0}+\un
 &amp; = -\frac{t-o}{o \cdot (1-o)}
 \end{align}\]</span> Og derfor er <span class="math display">\[
 - \frac{dE}{do}=\frac{t-o}{o \cdot (1-o)}
-\]</span> som ved indsættelse i (<a href="#eq-opdatering_w1_med_forklaring">38</a>) giver <span class="math display">\[
+\]</span> som ved indsættelse i (<a href="#eq-opdatering_w1_med_forklaring">46</a>) giver <span class="math display">\[
 w_1 \leftarrow w_1 + \eta  \cdot \underbrace{\frac{t-o}{o \cdot (1-o)}}_{-dE/do} \cdot \underbrace{o \cdot (1-o)}_{\sigma&#39;(\cdots)} \cdot z_1
 \]</span> Vi ser nu, at udtrykket <span class="math inline">\(o \cdot (1-o)\)</span>, som var den faktor, der kunne give anledning til langsom læring, forkorter ud, og vi får i stedet <span class="math display">\[
 w_1 \leftarrow w_1 + \eta  \cdot (t-o) \cdot  z_1
@@ -4720,12 +4723,11 @@ y_{8,8}&amp; =\sigma(v_0 + v_1 \cdot x_{8,8} + v_2 \cdot x_{8,9} + v_3 \cdot x_{
 
 </div>
 </div>
-<p>Et feature map, som kan bruges til at finde henholdsvis lodrette og vandret linjer i et billede er vist i <a href="#fig-feature_maps">figur 14</a>.</p>
-<div id="fig-feature_maps" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<p>Et feature map, som kan bruges til at finde henholdsvis lodrette og vandret linjer i et billede er vist i <a href="#fig-feature1_maps">figur 14</a> og <a href="#fig-feature2_maps">figur 15</a>.</p>
+<div class="cell page-columns page-full">
+<div id="fig-feature1_maps" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
-<div class="cell">
-<div class="cell-output-display">
-<table id="tab:unnamed-chunk-6" class="huxtable table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="tab:fig-feature1_maps" class="huxtable table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
 <tr class="odd">
 <td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
@@ -4746,33 +4748,37 @@ y_{8,8}&amp; =\sigma(v_0 + v_1 \cdot x_{8,8} + v_2 \cdot x_{8,9} + v_3 \cdot x_{
 </table>
 
 
-</div>
-<div class="cell-output-display">
-<table id="tab:unnamed-chunk-6" class="huxtable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
-<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0</td>
-<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1</td>
-</tr>
-<tr class="even">
-<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
-<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0</td>
-<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
-<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0</td>
-<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1</td>
-</tr>
-</tbody>
-</table>
-
-
-</div>
-</div>
-<figcaption class="figure-caption margin-caption">Figur 14: Eksempler på feature maps. Venstre: Et feature map <span class="math inline">\(f_1\)</span>, som kan finde vandrette linjer i billeder. Højre: Et feature map <span class="math inline">\(f_2\)</span>, som kan finde lodrette linjer i billeder.</figcaption>
+<figcaption class="figure-caption margin-caption">Figur 14: Et feature map <span class="math inline">\(f_1\)</span>, som kan finde vandrette linjer i billeder.</figcaption>
 </figure>
+</div>
+</div>
+<div class="cell page-columns page-full">
+<div id="fig-feature2_maps" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<table id="tab:fig-feature2_maps" class="huxtable table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1</td>
+</tr>
+</tbody>
+</table>
+
+
+<figcaption class="figure-caption margin-caption">Figur 15: Et feature map <span class="math inline">\(f_2\)</span>, som kan finde lodrette linjer i billeder.</figcaption>
+</figure>
+</div>
 </div>
 <p>Det ses hurtigt, at hvis vi anvender feature map <span class="math inline">\(f_1\)</span> til at vægte værdierne i et vilkårligt <span class="math inline">\(9 \times 9\)</span> vindue i det originale billede, så får man <span class="math inline">\(0\)</span> (såfremt vi sætter biasværdien <span class="math inline">\(v_0=0\)</span>). Anvender vi f.eks. <span class="math inline">\(f_1\)</span> på det tredje vindue fås <span class="math display">\[\begin{align}
 &amp;0+ 1 \cdot 0.94 + 1 \cdot 0.59  + 1 \cdot 0.39 + 0 \cdot 0.94 \\
@@ -4784,7 +4790,7 @@ y_{8,8}&amp; =\sigma(v_0 + v_1 \cdot x_{8,8} + v_2 \cdot x_{8,9} + v_3 \cdot x_{
 \end{align*}\]</span> Anvendes sigmoid-funktionen fås <span class="math inline">\(\sigma(1.65)=0.84\)</span>. Sådan fortsættes for alle <span class="math inline">\(64\)</span> vinduer (local receptive fields), og man ender med nedenstående convolutional lag, hvor værdierne også er vist med de tilhørende farver (i den allermørkeste søjle står der <span class="math inline">\(0.16\)</span> - det er bare lidt svært at se!):</p>
 <div class="cell">
 <div class="cell-output-display">
-<table id="tab:unnamed-chunk-7" class="huxtable table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="tab:unnamed-chunk-8" class="huxtable table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
 <tr class="odd">
 <td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; background-color: rgb(128, 128, 128); font-weight: normal;">0.5</td>
@@ -4876,7 +4882,7 @@ y_{8,8}&amp; =\sigma(v_0 + v_1 \cdot x_{8,8} + v_2 \cdot x_{8,9} + v_3 \cdot x_{
 <p>Herefter kondenseres billedet yderligere i det man kalder for et <em>pooling layer</em>. Det gør man ved at inddele ovenstående billede i f.eks. <span class="math inline">\(2 \times 2\)</span> pixels vinduer, som <em>ikke</em> overlapper hinanden. Herefter kan man gøre forskellige ting - en simpel mulighed er at tage maksimumsværdien af de <span class="math inline">\(4\)</span> pixels i hvert billede. Dette kaldes for <em>max pooling</em>. Gør man det får man følgende <span class="math inline">\(4 \times 4\)</span> pixels billede (igen vist med de tilhørende farver):</p>
 <div class="cell">
 <div class="cell-output-display">
-<table id="tab:unnamed-chunk-8" class="huxtable table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="tab:unnamed-chunk-9" class="huxtable table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
 <tr class="odd">
 <td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0.4pt; padding: 6pt 6pt 6pt 6pt; background-color: rgb(189, 189, 189); font-weight: normal;">0.74</td>
@@ -4909,21 +4915,17 @@ y_{8,8}&amp; =\sigma(v_0 + v_1 \cdot x_{8,8} + v_2 \cdot x_{8,9} + v_3 \cdot x_{
 </div>
 </div>
 <p>Læg mærke til hvordan man på dette kondenserede billede tydeligt kan se den lodrette stribe, som var i det oprindelige billede.</p>
-<p>Så dette er den overordnede idé, men der er flere ting at bemærke. For det første bruges et feature map til at finde egenskaber på et billede som vist ovenfor, men man vil typisk ikke kun lede efter én egenskab men flere. Det vil sige, at der ikke kun er ét convolutional lag, men måske <span class="math inline">\(5\)</span> eller <span class="math inline">\(20\)</span> lag. For hvert af disse lag fås et tilhørende pooling lag. Dette er illustreret på <a href="#fig-CNN">figur 15</a>.</p>
+<p>Så dette er den overordnede idé, men der er flere ting at bemærke. For det første bruges et feature map til at finde egenskaber på et billede som vist ovenfor, men man vil typisk ikke kun lede efter én egenskab men flere. Det vil sige, at der ikke kun er ét convolutional lag, men måske <span class="math inline">\(5\)</span> eller <span class="math inline">\(20\)</span> lag. For hvert af disse lag fås et tilhørende pooling lag. Dette er illustreret på <a href="#fig-CNN">figur 16</a>.</p>
 <div id="fig-CNN" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="data:image/png;base64,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" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption margin-caption">Figur 15: Convolutional neural network.</figcaption>
+<figcaption class="figure-caption margin-caption">Figur 16: Convolutional neural network.</figcaption>
 </figure>
 </div>
 <p><em>Alle</em> neuroner i pooling lagene forbindes nu til outputneuronen. Igen udregnes sigmoid-funktionen taget på en vægtet sum af alle neuronerne fra pooling lagene. Der er også mulighed for at indlægge flere convolutional og pooling lag i netværket. Ligesom der også kan indlægges flere &quot;almindelige&quot; neuroner (som vi tidligere har set det) efter pooling lagene.</p>
 <p>For det andet vil man ikke anvende feature maps som på forhånd er defineret (som vi gjorde det i eksemplet ovenfor). For hvert convolutional layer trænes i stedet for de fælles vægte, som skal benyttes i det pågældende feature map. Selve træningen af netværket foregår igen ved hjælp af backpropagation, men nu justeret til de begrænsninger der er lagt ind i netværket.</p>
 <p>For det tredje bliver antallet af vægte, som skal fittes, drastiske reduceret i et convolutional neuralt netværk sammenlignet med et almindelig neuralt netværk. Lad os som eksempel se på klassifikation af et <span class="math inline">\(10 \times 10\)</span> pixels billede. Antag, at vi anvender et local receptive field (vindue) på <span class="math inline">\(3 \times 3\)</span> pixels. Det vil sige, at hvert convolutional lag vil bestå af <span class="math inline">\(8 \times 8\)</span> neuroner. Da vægtene er delte, vil vi for hvert convolutional lag få bruge for <span class="math inline">\(3 \cdot 3 + 1=10\)</span> vægte. Antag, at vi har <span class="math inline">\(5\)</span> convolutional lag (bestående af <span class="math inline">\(5 \cdot 8 \cdot 8=320\)</span> neuroner), så får vi i alt brug for <span class="math inline">\(5 \cdot 10=50\)</span> vægte. For at komme til pooling laget anvendes ingen vægte. Men pooling laget vil bestå af <span class="math inline">\(5\)</span> pooling lag med i alt <span class="math inline">\(4 \times 4\)</span> neuroner. Det giver <span class="math inline">\(80\)</span> neuroner i alt. Forbindes disse til én outputneuron skal vi bruge <span class="math inline">\(81\)</span> vægte (én for hver neuron plus en bias). Alt i alt ender vi med <span class="math inline">\(131\)</span> vægte.</p>
 <p>Havde vi i stedet lavet et fuldt forbundet kunstigt neuralt netværk med <span class="math inline">\(100\)</span> input neuroner, ét skjult lag med <span class="math inline">\(64\)</span> neuroner samt én outputneuron, så skulle vi først have bruge <span class="math inline">\(101 \cdot 64=6464\)</span> vægte for at forbinde input neuronerne med samtlige neuroner i det første skjulte lag. Herefter har vi brug for <span class="math inline">\(65\)</span> vægte for at forbinde det skjulte lag med outputneuronen. Alt i alt giver det <span class="math inline">\(6529\)</span> vægte! Der er altså en voldsom forskel i antallet af vægte, som skal læres. For at undgå overfitting må vi have mange flere træningsdata, end vi har vægte. Det betyder, at vi typisk vil kunne nøjes med færre træningseksempler i et convolutional neural netværk sammenlignet med et klassisk fuldt forbundet kunstigt neuralt netværk. Ydermere viser det sig, at convolutional neurale netværk kan trænes til at klassificere billeder langt bedre end et almindeligt kunstigt neuralt netværk. Netop fordi at de forskellige pixels placeringer i forhold til hinanden tages i betragtning, når et convolutional neuralt netværk konstrueres.</p>
-</section>
-<section id="noten-som-pdf" class="level1">
-<h1>Noten som pdf</h1>
-<p><a href="./neuralenet_v3.pdf">Noten om kunstige neurale netværk</a> (pdf-fil).</p>
 </section>
 <section id="videre-læsning" class="level1 unnumbered">
 
