@@ -8,6 +8,7 @@ format:
       toc: true
       toc-title: Indhold
       toc-location: left
+      related-formats-title: "Andre formater"
     pdf: default
 reference-location: margin
 bibliography: referencer.bib
@@ -624,10 +625,11 @@ $$
 $$ 
 Den partielle afledede af $o$ med hensyn til $z_1$ finder vi ved at bruge definitionen af outputværiden $o$ i (@eq-o)
 \begin{align}
+\label{#eq-dodz_1}
 \frac{\partial o}{\partial z_1} &= \sigma'(w_1 \cdot z_1+w_2 \cdot z_2 + w_0) \cdot w_1 \nonumber \\
 &= \sigma(w_1 \cdot z_1+w_2 \cdot z_2 + w_0) \cdot (1-\sigma(w_1 \cdot z_1+w_2 \cdot z_2 + w_0)) \cdot w_1 \nonumber \\
 &= o \cdot (1-o) \cdot w_1
-\end{align} {#eq-dodz_1}
+\end{align} 
 hvor vi igen har brugt @thm-sigmoid_diff. Og endelig ved at udnytte definitionen af $z_1$ i (@eq-z_1) får vi, at
 \begin{align}
 \frac{\partial z_1}{\partial v_1} &= \sigma'(v_1 \cdot y_1+v_2 \cdot y_2 + v_0) \cdot y_1 \\
@@ -2211,6 +2213,7 @@ vandret linjer i et billede er vist i @fig-feature_maps.
 
 ::: {#fig-feature_maps}
 ```{r}
+#| layout-col: 2
 feature1<-matrix(c(1,0,-1,1,0,-1,1,0,-1),nrow=3)
 f1<-hux(feature1)
 set_all_borders(f1)
@@ -2218,7 +2221,7 @@ feature2<-matrix(c(1,1,1,0,0,0,-1,-1,-1),nrow=3)
 f2<-hux(feature2)
 set_all_borders(f2)
 ```
-Eksempler på feature maps. Venstre: Et feature map $f_1$, som kan finde vandrette linjer i billeder. Højre: Et feature map $f_2$, som kan finde lodrette linjer i billeder.
+Eksempler på feature maps. Øverst: Et feature map $f_1$, som kan finde vandrette linjer i billeder. Nederst: Et feature map $f_2$, som kan finde lodrette linjer i billeder.
 :::
 
 Det ses hurtigt, at hvis vi anvender feature map $f_1$ til at vægte
@@ -2346,9 +2349,6 @@ sig, at convolutional neurale netværk kan trænes til at klassificere
 billeder langt bedre end et almindeligt kunstigt neuralt netværk. Netop
 fordi at de forskellige pixels placeringer i forhold til hinanden tages
 i betragtning, når et convolutional neuralt netværk konstrueres.
-
-# Noten som pdf
-[Noten om kunstige neurale netværk](./neuralenet_v3.pdf) (pdf-fil).
 
 # Videre læsning
 
