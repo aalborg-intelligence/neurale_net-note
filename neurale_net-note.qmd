@@ -2212,7 +2212,7 @@ set_all_borders(ht)
 ```
 
 Et feature map, som kan bruges til at finde henholdsvis lodrette og
-vandret linjer i et billede er vist i @fig-feature1_maps og @fig-feature2_maps.
+vandrette linjer i et billede er vist i @fig-feature1_maps og @fig-feature2_maps.
 ```{r}
 #| label: fig-feature1_maps
 #| fig-cap: Et feature map $f_1$, som kan finde vandrette linjer i billeder.
